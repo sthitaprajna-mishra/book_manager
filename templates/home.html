@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1> Add book </h1>
+
+<form autocomplete = "off" action = "/" method = "POST">
+	<div class = "form-group">
+		<input type = "text" name = "title">
+	</div>
+	<div class = "form-group">
+		<input type = "submit" value = "Add">
+	</div>
+</form>
+
+<br>
+
+<h1> Books </h1>
+
+<br>
+
+{% for book in books %}
+	<h5> {{book.title}} </h5>
+	<form autocomplete = "off" method = "POST" action = "/update">
+		<input type = "hidden" name = "oldtitle" value = "{{book.title}}">
+		<input type = "text" name = "newtitle" value = "{{book.title}}">
+		<input type = "submit" value = "Update">
+	</form><br>
+	<form method = "POST" action = "/delete">
+		<input type = "hidden" value = "{{book.title}}" name = "title">
+		<input type = "submit" value = "Delete">
+	</form><br>
+{% endfor %}
+
+{% endblock %}
